@@ -1,7 +1,9 @@
 require 'date'
-require 'sun_time/degree_trig'
+
+require File.expand_path(File.join(File.dirname(__FILE__), "sun_time/degree_trig"))
 
 class SunTime
+  VERSION = '0.0.1'
   
   class AlwaysDarkError < ::StandardError; end
   class AlwaysLightError < ::StandardError; end
@@ -12,6 +14,7 @@ class SunTime
     @date = date
     @lat = lat
     @lng = lng
+    @m = nil
   end
   
   def sunrise
@@ -25,6 +28,9 @@ class SunTime
   rescue AlwaysDarkError, AlwaysLightError
     nil
   end
+    
+private
+  include DegreeTrig
   
   # Julian date
   def j_date
@@ -58,9 +64,9 @@ class SunTime
   
   # Ecliptical longitude of the sun
   def sun_l
-    m = @m || self.m #198.23212102042
-    c = c(m) #-0.58743698541815
-    (m + 102.9372 + c + 180) % 360
+    _m = @m || m
+    c = c(_m)
+    (_m + 102.9372 + c + 180) % 360
   end
   
   # Declination of the sun
@@ -107,9 +113,7 @@ class SunTime
   def j_rise
     j_transit - (j_set - j_transit)
   end
-  
-private
-  
+
   # Julian date of sunset on cycle n
   def j_set
     @j_star = 2451545 + 0.0009 + ((h + lng_w) / 360) + n
@@ -117,7 +121,6 @@ private
     @j_star + (0.0053 * sin(@m)) - (0.0069 * sin(2*sun_l))
   end
   
-  include DegreeTrig
   
   def jd2time (jd)
     dt = DateTime.jd(jd, 12)
