@@ -11,13 +11,13 @@ class TestSunTime < Test::Unit::TestCase
   end
   
   def test_sunrise
-    sunrise = Time.mktime(2009, 7, 23, 4, 50, 32)
+    sunrise = Time.utc(2009, 7, 23, 2, 50, 32)
     
     assert_equal(sunrise, @sun_time.sunrise)
   end
   
   def test_sunset
-    sunset =  Time.mktime(2009, 7, 23, 21, 48, 56)
+    sunset =  Time.utc(2009, 7, 23, 19, 48, 56)
   
     assert_equal(sunset, @sun_time.sunset)
   end
