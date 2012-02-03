@@ -123,7 +123,8 @@ private
   
   
   def jd2time (jd)
-    dt = DateTime.jd(jd, 12)
-    Time.utc(dt.year, dt.month, dt.day, dt.hour, dt.min, dt.sec)
+    dt = DateTime.jd(jd)
+    twelve_hour_offset_in_seconds = 12*60*60
+    Time.utc(dt.year, dt.month, dt.day, dt.hour, dt.min, dt.sec) + twelve_hour_offset_in_seconds
   end 
 end
