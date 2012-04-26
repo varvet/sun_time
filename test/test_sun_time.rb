@@ -33,6 +33,12 @@ class TestSunTime < Test::Unit::TestCase
     assert_nil(winter_in_sweden.sunrise)
     assert_nil(winter_in_sweden.sunset)
   end
+
+  def test_infinite_loop
+    sunrise = Time.utc(2012, 4, 24, 10, 4, 51)
+    infinite_loop_location = SunTime.new(Date.new(2012,4,24), 40.9674702, -74.2278852)
+    assert_equal(sunrise, infinite_loop_location.sunrise)
+  end
   
   # Private methods
   

@@ -4,6 +4,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "sun_time/degree_trig
 
 class SunTime
   VERSION = '0.0.1'
+  MEAN_SOLAR_ANOMALY_DELTA = 0.000001
   
   class AlwaysDarkError < ::StandardError; end
   class AlwaysLightError < ::StandardError; end
@@ -97,7 +98,7 @@ private
   def recalculate_m
     current_m = m(j_transit)
     last_m = nil
-    until current_m == last_m
+    until close_enough(current_m, last_m)
       last_m = current_m
       current_m = m(j_transit(last_m))
     end
@@ -127,4 +128,13 @@ private
     twelve_hour_offset_in_seconds = 12*60*60
     Time.utc(dt.year, dt.month, dt.day, dt.hour, dt.min, dt.sec) + twelve_hour_offset_in_seconds
   end 
+
+  private
+
+  # There are some edge cases where comparing values was never returning true.
+  # This gets around that by ensuring they are "close enough"
+  def close_enough(actual, expected)
+    return false if expected.nil?
+    (actual - expected).abs <= MEAN_SOLAR_ANOMALY_DELTA
+  end
 end
