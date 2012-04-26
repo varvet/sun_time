@@ -129,8 +129,6 @@ private
     Time.utc(dt.year, dt.month, dt.day, dt.hour, dt.min, dt.sec) + twelve_hour_offset_in_seconds
   end 
 
-  private
-
   # There are some edge cases where comparing values was never returning true.
   # This gets around that by ensuring they are "close enough"
   def close_enough(actual, expected)
