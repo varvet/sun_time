@@ -50,7 +50,7 @@ If you try to calculate sunrise or sunset for a location where the sun doesn't r
 Optionally, you can use SunTime as an extension to the Date class. Here's how you do that:
 
     require 'sun_time'
-    require 'sun_time/date_ext
+    require 'sun_time/date_ext'
 
     date = Date.new(2009, 7, 23)
 
