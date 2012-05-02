@@ -3,7 +3,7 @@ require 'date'
 require File.expand_path(File.join(File.dirname(__FILE__), "sun_time/degree_trig"))
 
 class SunTime
-  VERSION = '0.0.1'
+  VERSION = '0.0.2'
   MEAN_SOLAR_ANOMALY_DELTA = 0.000001
   
   class AlwaysDarkError < ::StandardError; end
