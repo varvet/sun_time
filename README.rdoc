@@ -64,11 +64,17 @@ Optionally, you can use SunTime as an extension to the Date class. Here's how yo
 
 sudo gem install sun_time
 
+== CONTRIBUTORS:
+
+* cjkihlbom
+* alanpeabody
+* beerlington
+
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2009 Edithouse eLabs AB
+Copyright (c) 2009 Elabs AB
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
